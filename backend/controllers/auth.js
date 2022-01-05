@@ -9,6 +9,11 @@ const landing = (req, res) => {
     res.send('landing page')
 };
 
+const profile = (req, res) => {
+    console.log('profile page')
+    res.send('profile page')
+};
+
 const signup = async (req, res) => {
     try{
         const hash = await bcrypt.hash(req.body.password, 10);
@@ -59,6 +64,7 @@ const deleteUser = async (req, res) => {
 
 module.exports = {
     landing,
+    profile,
     signup,
     login,
     update,
