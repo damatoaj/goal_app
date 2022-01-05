@@ -55,7 +55,7 @@ const deletePro = async (req, res) => {
         const pg = await outcome.performanceGoals.indexOf(performanceGoal[0]);
         outcome.performanceGoals[pg].processGoals.forEach((goal, i)=> {
             if(goal._id.toString() === req.params.id) {
-                outcome.performanceGoals[pg].processGoals.splice(i, 1)
+                outcome.performanceGoals[pg].processGoals.splice(i, 1);
             }
         });
         await outcome.save();

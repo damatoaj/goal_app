@@ -37,10 +37,21 @@ const update = async (req, res) => {
     }
 };
 
-const deletePerf = (req, res) => {
-    console.log('delete performance goal')
-    res.send('delete performance goal')
-}
+const deletePerf = async (req, res) => {
+    try {
+        const outcome = await Outcome.findOne({"performanceGoals._id":req.params.id});
+        if(!outcome) return res.status(404).send();
+        const performanceGoal = await outcome.performanceGoals.find(performance => {
+            return performance._id.toString() === req.params.id
+        });
+        const pg = await outcome.performanceGoals.indexOf(performanceGoal);
+        outcome.performanceGoals.splice(pg,1);
+        outcome.save();
+        res.send(outcome);
+    } catch (e) {
+        res.status(500).send();
+    }
+};
 //export the functions
 module.exports = {
     create,
