@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const outcomeGoal = require('./outcome')
+const outcomeGoal = require('./outcome');
 
 const options = {
     timestamps: true,
