@@ -24,9 +24,9 @@ const edit = (req, res) => {
 const update = async (req, res) => {
     const updates = Object.keys(req.body);
     try {
-        const object = await Outcome.findOne({"performanceGoals.processGoals._id":req.params.id})
-        if (!object) return res.status(404).send();
-        const performanceGoal = object.performanceGoals.filter(performance => {
+        const outcome = await Outcome.findOne({"performanceGoals.processGoals._id":req.params.id})
+        if (!outcome) return res.status(404).send();
+        const performanceGoal = outcome.performanceGoals.filter(performance => {
             return performance.processGoals.find(process => {
                 return process._id.toString() === req.params.id;
             })
@@ -36,15 +36,33 @@ const update = async (req, res) => {
                 updates.forEach((update)=> goal[update] = req.body[update])
             }
         });
-        res.send(object)
+        outcome.save();
+        res.send(outcome);
     } catch (e) {
         res.status(500).send();
     }
 };
 
-const deletePro = (req, res) => {
-    console.log('delete process')
-    res.send('delete process')
+const deletePro = async (req, res) => {
+    try {
+        const outcome = await Outcome.findOne({"performanceGoals.processGoals._id" : req.params.id});
+        if (!outcome) return res.status(404).send();
+        const performanceGoal = await outcome.performanceGoals.filter(performance => {
+            return performance.processGoals.find(process => {
+                return process._id.toString() === req.params.id;
+            })
+        });
+        const pg = await outcome.performanceGoals.indexOf(performanceGoal[0]);
+        outcome.performanceGoals[pg].processGoals.forEach((goal, i)=> {
+            if(goal._id.toString() === req.params.id) {
+                outcome.performanceGoals[pg].processGoals.splice(i, 1)
+            }
+        });
+        await outcome.save();
+        res.send(outcome);
+    } catch (e) {
+        res.status(500).send();
+    }
 };
 
 //export the functions
