@@ -35,9 +35,17 @@ const createOutcome = async (req, res) => {
     };
 };
 
-const updateOutcome = (req, res) => {
-    console.log('update outcome')
-    res.send('updateOutcome function')
+const updateOutcome = async (req, res) => {
+    const updates = Object.keys(req.body);
+    try {
+        const outcome = await Outcome.findById(req.params.id);
+        if(!outcome) return res.status(404).send();
+        updates.forEach((update)=> outcome[update] = req.body[update]);
+        await outcome.save();
+        res.send(outcome);
+    } catch (e) {
+        res.status(500).send();
+    }
 };
 
 const deleteOutcome = async (req, res) => {

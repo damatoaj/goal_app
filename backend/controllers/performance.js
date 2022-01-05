@@ -19,9 +19,14 @@ const edit = (req,res) => {
     res.send('edit performance goal')
 };
 
-const update = (req, res) => {
-    console.log('update performance goal')
-    res.send('update performance goal')
+const update = async (req, res) => {
+    console.log(req.body, req.params, 'update performance goal')
+    try {
+
+        res.send('update performance goal')
+    } catch (e) {
+        res.status(500).send();
+    }
 };
 
 const deletePerf = (req, res) => {
