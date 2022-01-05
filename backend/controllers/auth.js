@@ -37,13 +37,23 @@ const login = async (req, res) => {
 };
 
 const update = async (req, res) => {
-    console.log(req.user)
+    const updates = Object.keys(req.body);
     try {
-        const user = await User.findByIdAndUpdate(req.user._id, { name: req.body.name })
-        await user.save()
-        res.status(201).send(user)
+        const user = await User.findById(req.user._id);
+        updates.forEach((update) => user[update] = req.body[update])
+        await user.save();
+        res.status(201).send(user);
     } catch(e) {
         res.status(500).send();
+    }
+};
+
+const deleteUser = async (req, res) => {
+    try{
+        const user = await User.findByIdAndDelete(req.user._id); 
+        res.send(user)
+    }catch (e) {
+        res.status(500).send()
     }
 };
 
@@ -51,5 +61,6 @@ module.exports = {
     landing,
     signup,
     login,
-    update
+    update,
+    delete: deleteUser
 };
