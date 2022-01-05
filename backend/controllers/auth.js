@@ -36,8 +36,20 @@ const login = async (req, res) => {
     }
 };
 
+const update = async (req, res) => {
+    console.log(req.user)
+    try {
+        const user = await User.findByIdAndUpdate(req.user._id, { name: req.body.name })
+        await user.save()
+        res.status(201).send(user)
+    } catch(e) {
+        res.status(500).send();
+    }
+};
+
 module.exports = {
     landing,
     signup,
-    login
+    login,
+    update
 };
