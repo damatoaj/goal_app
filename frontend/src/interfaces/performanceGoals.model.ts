@@ -1,7 +1,7 @@
 import { Process } from './processGoals.models'
 
 export interface Performance {
-    id: string;
+    _id: string;
     dueDate: Date;
     description: string;
     percentImproved: number;

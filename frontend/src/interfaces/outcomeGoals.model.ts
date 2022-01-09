@@ -1,7 +1,7 @@
 import { Performance } from './performanceGoals.model';
 
 export interface Outcome {
-    id: string;
+    _id: string;
     description: string;
     dateDue: Date;
     complete: Boolean;

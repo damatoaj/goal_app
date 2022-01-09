@@ -1,6 +1,6 @@
 import React from 'react';
 import { User } from '../../interfaces/user.model';
-import { Link } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 
 type authHeaderProps = {
     user: User;
@@ -11,18 +11,21 @@ const AuthHeader: React.FC <authHeaderProps> = (props) => {
     return (
         <header>
             {props.user.name}
-            <button onClick={props.logoutHandler}>Logout</button>
+            <button onClick={props.logoutHandler}>
+                <Link to="/">Logout</Link>
+            </button>
             <ul>
                 <li>
-                    <Link to='/'>Home</Link>
+                    <Link to='/dashboard'>Home</Link>
                 </li>
                 <li>
-                    <Link to=''>Outcome Goals</Link>
+                    <Link to='/newOutcome'>Outcome Goals</Link>
                 </li>
                 <li>
                     <Link to=''>New Goal</Link>
                 </li>
             </ul>
+            <Outlet />
         </header>
     )
 };

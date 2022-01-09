@@ -1,5 +1,5 @@
 export interface Process {
-    id: string;
+    _id: string;
     action: string;
     duraction: number;
     frequency: number;

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import { User } from './interfaces/user.model'
 
 import Landing from './components/Landing/Landing';
 import Header from './components/Header/Header';
+import Dashboard from './components/Dashboard/Dashboard';
+import NewOutcome from './components/NewOutcome/NewOutcome';
 
 const App: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -22,14 +24,21 @@ const App: React.FC = () => {
     setUser(null);
   };
 
-  return (
-    <Router>
-      <div className="App">
-        <Header user={user} logoutHandler={logoutHandler} />
-        <Landing handleAuth={handleAuth}/>
-      </div>
-    </Router>
-  );
+  if (!user) {
+    return (
+      <>
+          <Header user={null} logoutHandler={logoutHandler} />
+          <Landing handleAuth={handleAuth}/>
+      </>
+    );
+  } else {
+    return(
+       <>
+          <Header user={user} logoutHandler={logoutHandler} />
+      </>
+    )
+  }
+
 }
 
 export default App;
