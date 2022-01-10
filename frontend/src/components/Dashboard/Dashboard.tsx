@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState, FormEvent} from 'react';
 import { Outcome } from '../../interfaces/outcomeGoals.model';
 
 
@@ -10,7 +10,7 @@ import Display from './Display';
 const Dashboard: React.FC = () => {
     const [outcomes, setOutcomes] = useState<Outcome[]>([]);
     const [active, setActive] = useState<Outcome>(outcomes[0]);
-    console.log(active)
+    console.log(active, 'active Outcome')
 
     useEffect(()=> {
         (async ()=> {
@@ -37,6 +37,21 @@ const Dashboard: React.FC = () => {
             console.log(err)
         }
     }
+
+    const deletePerformance = async (e: FormEvent, id:string) => {
+        e.preventDefault();
+        try {
+            const req = await axios.delete(`http://localhost:3000/performances/${id}`);
+            const res = await axios.get(`http://localhost:3000/outcomes`);
+            const data : Outcome[] = res.data;
+            console.log(data, '<----- data')
+            console.log(req, '<---- req')
+            setOutcomes(data);
+            setActive(req.data)
+        } catch (err) {
+            console.log(err)
+        }
+    }
     
     return (
         <section>
@@ -51,7 +66,7 @@ const Dashboard: React.FC = () => {
             {active ? <Display active={active} delete={deleteOutcome}/> : <li>make some goals</li> }
             <ul>
 
-                {active ? <Perf performances={active.performanceGoals} /> : <li>Make some goals</li>}
+                {active ? <Perf performances={active.performanceGoals} setOutcomes={setOutcomes} delete={deletePerformance} /> : <li>Make some goals</li>}
             </ul>
                 
             

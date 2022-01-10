@@ -1,8 +1,10 @@
 import axios from 'axios';
 import React, {FormEvent, useRef} from 'react'
+import {Outcome} from '../../interfaces/outcomeGoals.model';
 
 type formProps = {
     id: string;
+    setOc:(arg: Outcome)=> void;
 }
 
 const PerformanceForm: React.FC <formProps> = (props) => {
@@ -24,6 +26,10 @@ const PerformanceForm: React.FC <formProps> = (props) => {
                 complete: false,
                 processGoals: []
             });
+            const oc : any = await axios.get(`http://localhost:3000/outcomes/${props.id}`);
+            const data : Outcome = oc.data;
+            props.setOc(data);
+
             descInputRef.current!.value = '';
             dateDueInputRef.current!.value = '';
             rewardInputRef.current!.value = '';

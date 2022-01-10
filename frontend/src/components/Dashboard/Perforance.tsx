@@ -1,12 +1,19 @@
-import React from 'react';
+import axios from 'axios';
+import React, { FormEvent } from 'react';
 import {Performance} from '../../interfaces/performanceGoals.model';
+import {Outcome} from '../../interfaces/outcomeGoals.model';
 
 
 type perfProps = {
     performances: Performance [];
+    setOutcomes: (arg: Outcome[]) => void;
+    delete: (arg: FormEvent, id:string) => void;
 }
 
 const Perf: React.FC <perfProps> = (props) => {
+
+
+
     let list = props.performances.map((performance:Performance,key:number) => {
         let date : Date = new Date(performance.dueDate);
             return (
@@ -38,7 +45,7 @@ const Perf: React.FC <perfProps> = (props) => {
                         <input type="number" name="percentImproved" placeholder={performance.percentImproved.toString()} />
                         <br></br>
                         <button>Update</button>
-                        <button>Delete</button>
+                        <button onClick={(e)=> props.delete(e, performance._id)}>Delete</button>
                     </fieldset>
                 </form>
             )

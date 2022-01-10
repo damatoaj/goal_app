@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
 
 import { User } from './interfaces/user.model'
 
 import Landing from './components/Landing/Landing';
 import Header from './components/Header/Header';
-import Dashboard from './components/Dashboard/Dashboard';
-import NewOutcome from './components/NewOutcome/NewOutcome';
 
 const App: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { FormEvent, useRef, useState } from 'react';
+import React, { FormEvent, useRef } from 'react';
 import { Outcome } from '../../interfaces/outcomeGoals.model';
 
 type formProps = {
