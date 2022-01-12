@@ -1,13 +1,12 @@
 const Outcome = require('../models/outcome');
 
-
 const index = async (req,res) => {
     try {
         const outcomes = await Outcome.find({});
         res.send(outcomes);
     } catch(e) {
         res.status(500).send();
-    }
+    };
 };
 
 const show = async (req, res) => {
@@ -17,12 +16,7 @@ const show = async (req, res) => {
         res.send(outcome);
     } catch(e) {
         res.status(500).send();
-    }
-};
-
-const getNew = (req, res) => {
-    console.log('get new outcome')
-    res.send('getNew function')
+    };
 };
 
 const createOutcome = async (req, res) => {
@@ -55,13 +49,12 @@ const deleteOutcome = async (req, res) => {
         res.send(outcome);
     } catch (e) {
         res.status(500).send();
-    }
+    };
 };
 
 module.exports = {
     index,
     show,
-    new: getNew,
     create:createOutcome,
     update:updateOutcome,
     delete:deleteOutcome

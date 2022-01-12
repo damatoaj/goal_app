@@ -3,8 +3,6 @@ const router = express.Router();
 const authCtrl = require('../controllers/auth');
 const passport = require('passport');
 
-router.get('/', authCtrl.landing);
-router.get('/profile', authCtrl.profile);
 router.post('/signup', authCtrl.signup);
 router.post('/login', authCtrl.login);
 router.put('/update', passport.authenticate('jwt', {session:false}), authCtrl.update);

@@ -27,7 +27,6 @@ const update = async (req, res) => {
         object.performanceGoals.forEach((goal,i) => {
             if(goal._id.toString() === req.params.id) {
                 console.log(goal, i, 'found it')
-                updates.forEach((update)=> goal[update] = req.body[update]);
             }
         });
         object.save();
