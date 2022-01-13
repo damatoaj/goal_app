@@ -24,9 +24,10 @@ const update = async (req, res) => {
     try {
         const object = await Outcome.findOne({"performanceGoals._id" : req.params.id});
         if (!object) return res.status(404).send();
+
         object.performanceGoals.forEach((goal,i) => {
             if(goal._id.toString() === req.params.id) {
-                console.log(goal, i, 'found it')
+                updates.forEach((update)=> goal[update] = req.body[update]);
             }
         });
         object.save();

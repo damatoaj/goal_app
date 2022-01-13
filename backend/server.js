@@ -1,4 +1,3 @@
-console.log('server.js')
 require('dotenv').config();
 require('./config/database');
 const cors = require('cors');
