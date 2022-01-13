@@ -7,12 +7,13 @@ import Dashboard from './components/Dashboard/Dashboard';
 import NewOutcome from './components/NewOutcome/NewOutcome';
 
 
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<App />} >
-          <Route path="dashboard" element={<Dashboard />} />
+        <Route path='/' element={<App />} >   
+          <Route path="home" element={<Dashboard />} />
           <Route path="newOutcome" element={<NewOutcome/>} />
         </Route>
       </Routes>

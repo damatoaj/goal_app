@@ -16,7 +16,7 @@ const AuthHeader: React.FC <authHeaderProps> = (props) => {
             </button>
             <ul>
                 <li>
-                    <Link to='/dashboard'>Home</Link>
+                    <Link to='/home'>Home</Link>
                 </li>
                 <li>
                     <Link to='/newOutcome'>Outcome Goals</Link>

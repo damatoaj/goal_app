@@ -4,20 +4,18 @@ import { Outcome } from '../../interfaces/outcomeGoals.model';
 
 
 import OutcomeLi from './OutcomeLi';
-import Perf from './Perforance';
+import Perf from './Performance';
 import Display from './Display';
 
 const Dashboard: React.FC = () => {
     const [outcomes, setOutcomes] = useState<Outcome[]>([]);
     const [active, setActive] = useState<Outcome>(outcomes[0]);
-    console.log(active, 'active Outcome')
 
     useEffect(()=> {
         (async ()=> {
            const resp : any =  await axios.get('http://localhost:3000/outcomes');
            const data : Outcome [] = await resp.data;
            setOutcomes(data);
-           console.log(data)
            setActive(data[0]);
         })()
     }, []);
@@ -44,14 +42,14 @@ const Dashboard: React.FC = () => {
             const req = await axios.delete(`http://localhost:3000/performances/${id}`);
             const res = await axios.get(`http://localhost:3000/outcomes`);
             const data : Outcome[] = res.data;
-            console.log(data, '<----- data')
-            console.log(req, '<---- req')
             setOutcomes(data);
             setActive(req.data)
         } catch (err) {
             console.log(err)
         }
-    }
+    };
+
+
     
     return (
         <section>

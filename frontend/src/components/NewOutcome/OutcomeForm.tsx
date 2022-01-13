@@ -4,6 +4,7 @@ import { Outcome } from '../../interfaces/outcomeGoals.model';
 
 type formProps = {
     setOc : (arg:Outcome)=> void;
+    oc: Outcome | null;
 };
 
 const OutcomeForm : React.FC <formProps> = (props) => {
@@ -36,16 +37,16 @@ const OutcomeForm : React.FC <formProps> = (props) => {
         <form onSubmit={handleForm}>
             <fieldset>
             <label>What's the Goal?</label>
-            <input type="text" name="description" ref={descInputRef}/>
+            <input type="text" name="description" ref={descInputRef} placeholder={props.oc?.description}/>
             <br></br>
-            <label>When's it Due?</label>
-            <input type="date" name="dueDate" ref={dateDueInputRef}/>
+            <label>{props.oc !==null ? `Currently due on ${props.oc.dateDue.toString().slice(0,10)}`:'When\'s it Due?'}</label>
+            <input type="date" name="dueDate" ref={dateDueInputRef} />
             <br></br>
             <label>How will you reward yourself?</label>
-            <input type="text" name="reward" ref={rewardInputRef} />
+            <input type="text" name="reward" ref={rewardInputRef} placeholder={props.oc?.reward}/>
             <br></br>
             <label>How will you hold yourself accountable?</label>
-            <input type="text" name="punishment" ref={punishmentInputRef} />
+            <input type="text" name="punishment" ref={punishmentInputRef} placeholder={props.oc?.punishment}/>
             <br></br>
             <button type="submit">Submit</button>
             </fieldset>

@@ -44,7 +44,7 @@ const PerformanceForm: React.FC <formProps> = (props) => {
         <form onSubmit={addPerf}>
             <fieldset>
                 <label htmlFor="description">What's the goal?</label>
-                <input type="text" name="description" ref={descInputRef}/>
+                <input type="text" name="description" ref={descInputRef} />
                 <br></br>
                 <label htmlFor="dueDate">When's it due?</label>
                 <input type="date" name="dueDate" ref={dateDueInputRef}/>
