@@ -6,6 +6,7 @@ import { Outcome } from '../../interfaces/outcomeGoals.model';
 import OutcomeLi from './OutcomeLi';
 import Perf from './Performance';
 import Display from './Display';
+import Process from './Process';
 
 const Dashboard: React.FC = () => {
     const [outcomes, setOutcomes] = useState<Outcome[]>([]);
@@ -36,7 +37,7 @@ const Dashboard: React.FC = () => {
         }
     }
 
-    const deletePerformance = async (e: FormEvent, id:string) => {
+    const deletePerformance = async (e:any, id:string) => {
         e.preventDefault();
         try {
             const req = await axios.delete(`http://localhost:3000/performances/${id}`);
@@ -62,12 +63,13 @@ const Dashboard: React.FC = () => {
                 })}
             </ul>
             {active ? <Display active={active} delete={deleteOutcome}/> : <li>make some goals</li> }
-            <ul>
-
-                {active ? <Perf performances={active.performanceGoals} setOutcomes={setOutcomes} delete={deletePerformance} /> : <li>Make some goals</li>}
-            </ul>
-                
-            
+                {active ?
+                    <ul> 
+                        <Perf performances={active.performanceGoals} setOutcomes={setOutcomes} delete={deletePerformance} ogID={active._id}/> 
+                        <Process performances={active.performanceGoals}/>
+                    </ul>: 
+                    <li>Make some goals</li>
+                }
         </section>
     )
 };

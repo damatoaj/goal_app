@@ -1,7 +1,7 @@
 export interface Process {
     _id: string;
     action: string;
-    duraction: number;
+    duration: number;
     frequency: number;
-    repeats: Boolean;
+    repeats: boolean;
 }
