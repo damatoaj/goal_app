@@ -86,7 +86,7 @@ const PerfList: React.FC <listProp> = (props) => {
                     <button onClick={(e)=> props.delete(e, props.performance._id)}>Delete</button>
                 </fieldset>
             </form> :
-            <ProcessForm performance={props.performance} setToggle={setToggle} toggle={toggle} ogID={props.ogID}/>
+            <ProcessForm performance={props.performance} setToggle={setToggle} toggle={toggle} ogID={props.ogID} setOutcomes={props.setOutcomes}/>
         }
         </>
     )

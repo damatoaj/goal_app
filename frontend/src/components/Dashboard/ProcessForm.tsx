@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, {FormEvent, useState} from 'react'
+import { Outcome } from '../../interfaces/outcomeGoals.model';
 import {Performance} from '../../interfaces/performanceGoals.model';
 
 type pfProps = {
@@ -7,6 +8,7 @@ type pfProps = {
     setToggle: (arg:Boolean) => void;
     toggle: Boolean;
     ogID:String;
+    setOutcomes:(arg:Outcome[]) => void;
 }
 
 const ProcessForm: React.FC <pfProps> = (props) => {
@@ -18,12 +20,15 @@ const ProcessForm: React.FC <pfProps> = (props) => {
     const handleSubmit= async(e:FormEvent) => {
         e.preventDefault();
         try{
-            const req = await axios.post(`http://localhost:3000/outcomes/${props.ogID}/performances/${props.performance._id}/processes`, {
+            const req : any = await axios.post(`http://localhost:3000/outcomes/${props.ogID}/performances/${props.performance._id}/processes`, {
                 action:action,
                 duration:duration,
                 frequency:frequency,
                 repeats:repeats,
             });
+            const res : any = await axios.get(`http://localhost:3000/outcomes/`)
+            const data : Outcome [] = await res.data;
+            if (data) props.setOutcomes(data);
             props.setToggle(false);
         } catch(err) {
             console.log(err)

@@ -17,7 +17,7 @@ const PerformanceForm: React.FC <formProps> = (props) => {
     const addPerf = async (e:FormEvent) => {
         e.preventDefault();
         try {
-            const res = await axios.post(`http://localhost:3000/outcomes/${props.id}/performances`, {
+            const req = await axios.post(`http://localhost:3000/outcomes/${props.id}/performances`, {
                 description: descInputRef.current!.value.trim(),
                 dueDate: dateDueInputRef.current!.value,
                 reward: rewardInputRef.current!.value.trim(),
@@ -26,9 +26,9 @@ const PerformanceForm: React.FC <formProps> = (props) => {
                 complete: false,
                 processGoals: []
             });
-            const oc : any = await axios.get(`http://localhost:3000/outcomes/${props.id}`);
-            const data : Outcome = oc.data;
-            props.setOc(data);
+            const res : any = await axios.get(`http://localhost:3000/outcomes/${props.id}`);
+            const data : Outcome = await res.data;
+            if (data) props.setOc(data);
 
             descInputRef.current!.value = '';
             dateDueInputRef.current!.value = '';

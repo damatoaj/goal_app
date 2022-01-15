@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState, FormEvent} from 'react';
+import React, { useEffect, useState} from 'react';
 import { Outcome } from '../../interfaces/outcomeGoals.model';
 
 
@@ -11,6 +11,7 @@ import Process from './Process';
 const Dashboard: React.FC = () => {
     const [outcomes, setOutcomes] = useState<Outcome[]>([]);
     const [active, setActive] = useState<Outcome>(outcomes[0]);
+    console.log(outcomes)
 
     useEffect(()=> {
         (async ()=> {
@@ -66,7 +67,7 @@ const Dashboard: React.FC = () => {
                 {active ?
                     <ul> 
                         <Perf performances={active.performanceGoals} setOutcomes={setOutcomes} delete={deletePerformance} ogID={active._id}/> 
-                        <Process performances={active.performanceGoals}/>
+                            <Process performances={active.performanceGoals} setOutcomes={setOutcomes}/>
                     </ul>: 
                     <li>Make some goals</li>
                 }

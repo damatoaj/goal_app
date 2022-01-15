@@ -1,8 +1,11 @@
+import axios from 'axios';
 import React, {FormEvent, useState} from 'react';
 import {Process} from '../../interfaces/processGoals.models';
+import {Outcome} from '../../interfaces/outcomeGoals.model';
 
 type pgProps = {
     process: Process;
+    setOutcomes:(arg:Outcome[]) => void;
 }
 
 const ProcessGoal: React.FC <pgProps> = (props) => {
@@ -10,14 +13,37 @@ const ProcessGoal: React.FC <pgProps> = (props) => {
     const [frequency, setFrequency] = useState<number>(props.process.frequency);
     const [repeats, setRepeats] = useState<boolean>(props.process.repeats);
 
-    const handleUpdate = (e:FormEvent) => {
+    const handleUpdate = async (e:FormEvent) => {
         e.preventDefault();
         console.log('update click')
+        try {
+            const req :any = await axios.put(`http://localhost:3000/processes/${props.process._id}`, {
+                duration: duration,
+                frequency: frequency,
+                repeats:repeats
+            })
+            console.log(req)
+            const res :any = await axios.get(`http://localhost:3000/outcomes`);
+            const data : Outcome [] = await res.data;
+            if(data) props.setOutcomes(data);
+            console.log(res)
+        } catch (err) {
+            console.log(err);
+        }
     };
 
-    const handleDelete = (e:FormEvent) => {
+    const handleDelete = async (e:FormEvent) => {
         e.preventDefault();
-        console.log('click delete')
+        try {
+            const req : any = await axios.delete(`http://localhost:3000/processes/${props.process._id}`);
+            const res : any = await axios.get(`http://localhost:3000/outcomes`);
+            const data : Outcome[]= await res.data;
+            if(data) props.setOutcomes(data);
+           
+            console.log(res.data)
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     return( 

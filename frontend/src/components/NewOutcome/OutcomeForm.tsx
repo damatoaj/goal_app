@@ -26,8 +26,8 @@ const OutcomeForm : React.FC <formProps> = (props) => {
                 complete: false,
                 performanceGoals: []
             })
-            const newOutcome: Outcome = res.data;
-            props.setOc(newOutcome);
+            const newOutcome: Outcome = await res.data;
+            if(newOutcome) props.setOc(newOutcome);
         } catch (err) {
             console.log(err)
         }
