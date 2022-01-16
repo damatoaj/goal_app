@@ -21,9 +21,6 @@ const AuthHeader: React.FC <authHeaderProps> = (props) => {
                 <li>
                     <Link to='/newOutcome'>Outcome Goals</Link>
                 </li>
-                <li>
-                    <Link to=''>New Goal</Link>
-                </li>
             </ul>
             <Outlet />
         </header>

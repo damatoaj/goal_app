@@ -6,12 +6,21 @@ import ProcessList from './ProcessList';
 type processProps = {
     performances: Performance [];
     setOutcomes :(arg: Outcome[])=> void;
+    setActive: (arg:Outcome) => void;
+    active:Outcome;
 }
 const Process:React.FC <processProps> = (props) => {
-    console.log(props, '<---my props')
-  
-       let performances = props.performances.map((performance, i) => {
-            return(<ul key={i}><ProcessList performance={performance} setOutcomes={props.setOutcomes}/></ul>)
+       let performances = props.performances.map((performance: Performance, id:number) => {
+            return(
+                <ul key={id}>
+                    <ProcessList 
+                        performance={performance} 
+                        setOutcomes={props.setOutcomes}
+                        setActive={props.setActive}
+                        active={props.active}
+                    />
+                </ul>
+            )
       })
 
       return (

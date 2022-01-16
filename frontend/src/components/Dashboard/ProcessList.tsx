@@ -7,13 +7,23 @@ import ProcessGoal from './ProcessGoal';
 type proProps = {
     performance: Performance;
     setOutcomes: (arg:Outcome[])=>void;
+    setActive: (arg:Outcome) => void;
+    active: Outcome;
 }
 
 const ProcessList:React.FC <proProps> = (props) => {
-    console.log(props.performance.processGoals, '<---line 13 processlist')
     let list = props.performance.processGoals.map((process: Process, i: number) => {
-        return <li key={i}><ProcessGoal process={process} setOutcomes={props.setOutcomes}/></li>
-    })
+        return (
+            <li key={i}>
+                <ProcessGoal 
+                    process={process} 
+                    setOutcomes={props.setOutcomes}
+                    setActive={props.setActive}
+                    active={props.active}
+                />
+            </li>
+        )
+    });
 
     return(
         <>

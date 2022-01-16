@@ -5,7 +5,7 @@ import {Outcome} from '../../interfaces/outcomeGoals.model';
 type formProps = {
     id: string;
     setOc:(arg: Outcome)=> void;
-}
+};
 
 const PerformanceForm: React.FC <formProps> = (props) => {
     const descInputRef = useRef<HTMLInputElement>(null);
@@ -14,10 +14,10 @@ const PerformanceForm: React.FC <formProps> = (props) => {
     const punishmentInputRef = useRef<HTMLInputElement>(null);
     const percentInputRef = useRef<HTMLInputElement>(null);
     
-    const addPerf = async (e:FormEvent) => {
+    const addPerf = async (e:FormEvent, id:string) => {
         e.preventDefault();
         try {
-            const req = await axios.post(`http://localhost:3000/outcomes/${props.id}/performances`, {
+            const req = await axios.post(`http://localhost:3000/outcomes/${id}/performances`, {
                 description: descInputRef.current!.value.trim(),
                 dueDate: dateDueInputRef.current!.value,
                 reward: rewardInputRef.current!.value.trim(),
@@ -26,7 +26,7 @@ const PerformanceForm: React.FC <formProps> = (props) => {
                 complete: false,
                 processGoals: []
             });
-            const res : any = await axios.get(`http://localhost:3000/outcomes/${props.id}`);
+            const res : any = await axios.get(`http://localhost:3000/outcomes/${id}`);
             const data : Outcome = await res.data;
             if (data) props.setOc(data);
 
@@ -41,22 +41,52 @@ const PerformanceForm: React.FC <formProps> = (props) => {
     }
 
     return (
-        <form onSubmit={addPerf}>
+        <form onSubmit={(e)=> addPerf(e, props.id)}>
             <fieldset>
-                <label htmlFor="description">What's the goal?</label>
-                <input type="text" name="description" ref={descInputRef} />
+                <label htmlFor="description">
+                    What's the goal?
+                </label>
+                <input 
+                    type="text" 
+                    name="description" 
+                    ref={descInputRef} 
+                />
                 <br></br>
-                <label htmlFor="dueDate">When's it due?</label>
-                <input type="date" name="dueDate" ref={dateDueInputRef}/>
+                <label htmlFor="dueDate">
+                    When's it due?
+                </label>
+                <input 
+                    type="date" 
+                    name="dueDate" 
+                    ref={dateDueInputRef}
+                />
                 <br></br>
-                <label htmlFor="percentImproved">How much will you improve by?</label>
-                <input type="number" name="percentImproved" ref={percentInputRef} />
+                <label htmlFor="percentImproved">
+                    How much will you improve by?
+                </label>
+                <input 
+                    type="number" 
+                    name="percentImproved" 
+                    ref={percentInputRef} 
+                />
                 <br></br>
-                <label htmlFor="reward">How will you reward yourself?</label>
-                <input type="text" name="reward" ref={rewardInputRef} />
+                <label htmlFor="reward">
+                    How will you reward yourself?
+                </label>
+                <input 
+                    type="text" 
+                    name="reward" 
+                    ref={rewardInputRef} 
+                />
                 <br></br>
-                <label htmlFor="punishment">How will you hold yourself accountable?</label>
-                <input type="text" name="punishment" ref={punishmentInputRef} />
+                <label htmlFor="punishment">
+                    How will you hold yourself accountable?
+                    </label>
+                <input 
+                    type="text" 
+                    name="punishment" 
+                    ref={punishmentInputRef} 
+                />
                 <br></br>
                 <button type="submit">Add</button>
             </fieldset>

@@ -10,8 +10,10 @@ import ProcessForm from './ProcessForm';
 type listProp = {
     performance: Performance;
     setOutcomes: (arg: Outcome[]) => void;
-    delete: (arg: FormEvent, id:string) => void;
+    delete: (e: FormEvent, id:string, setO:Function, setA:Function, aid:string) => void;
     ogID: String;
+    setActive:(arg:Outcome)=> void;
+    active: Outcome;
 }
 
 const PerfList: React.FC <listProp> = (props) => {
@@ -24,7 +26,7 @@ const PerfList: React.FC <listProp> = (props) => {
 
     let date : Date = new Date(props.performance.dueDate);
 
-    const updatePerformance = async (e:FormEvent, id:string) => {
+    const updatePerformance = async (e:FormEvent, id:string, setO:Function, setA:Function) => {
         e.preventDefault();
         try {
             const req : any = await axios.put(`http://localhost:3000/performances/${id}`, {
@@ -34,11 +36,13 @@ const PerfList: React.FC <listProp> = (props) => {
                 punishment: punishment,
                 percentImproved: percentImproved
             });
-            console.log(req)
             const res : any = await axios.get(`http://localhost:3000/outcomes`);
-            console.log(res, '<==== update form')
-            const data : Outcome[] = res.data;
-            props.setOutcomes(data);
+            const data : Outcome[] = await res.data;
+            if (data) {
+                let a : Outcome | undefined = data.find(d => d._id === props.active._id);
+                setO(data);
+                if(a) setA(a);
+            }
         } catch(err) {
             console.log(err)
         }
@@ -46,9 +50,7 @@ const PerfList: React.FC <listProp> = (props) => {
 
     const showForm = (e:MouseEvent) => {
         e.preventDefault();
-        console.log('click')
         setToggle(true);
-        console.log(toggle)
     }
 
     return (
@@ -59,34 +61,94 @@ const PerfList: React.FC <listProp> = (props) => {
                     <legend>{props.performance.description}</legend>
                     {props.performance.completed === true ?
                         <>
-                        <label htmlFor="completed" >You finished it, way to go</label>
-                        <input type="checkbox" name="completed" checked onChange={(e)=>setCompleted(e.target.checked)}/>
+                        <label htmlFor="completed" >
+                            You finished it, way to go
+                        </label>
+                        <input 
+                            type="checkbox" 
+                            name="completed" 
+                            checked onChange={(e)=>setCompleted(e.target.checked)}
+                        />
                         </>
                         :
                         <>
-                        <label htmlFor="completed">Not done yet</label>
-                        <input type="checkbox" name="completed" onChange={(e)=>setCompleted(e.target.checked)} />
+                        <label htmlFor="completed">
+                            Not done yet
+                        </label>
+                        <input 
+                            type="checkbox" 
+                            name="completed" 
+                            onChange={(e)=>setCompleted(e.target.checked)} 
+                        />
                         </>
                     }
                     <br></br>
-                    <label htmlFor="dueDate">Currently due on <time>{date.toLocaleDateString()}</time></label>
+                    <label htmlFor="dueDate">
+                        Currently due on <time>{date.toLocaleDateString()}</time>
+                    </label>
                     <DatePicker selected={dateDue} name="dateDue" onChange={(date: Date)=> setDateDue(date)} />
                     <br></br>
-                    <label htmlFor="reward">How will you reward yourself?</label>
-                    <input type="text" name="reward"  placeholder={props.performance.reward} onChange={(e)=> setReward(e.target.value)}/>
+                    <label htmlFor="reward">
+                        How will you reward yourself?
+                    </label>
+                    <input 
+                        type="text" 
+                        name="reward"  
+                        placeholder={props.performance.reward} 
+                        onChange={(e)=> setReward(e.target.value)}
+                    />
                     <br></br>
-                    <label htmlFor="punishment">How will you hold yourself accountable?</label>
-                    <input type="text" name="punishment" placeholder={props.performance.punishment} onChange={(e)=>setPunishment(e.target.value)}/>
+                    <label htmlFor="punishment">
+                        How will you hold yourself accountable?
+                    </label>
+                    <input 
+                        type="text" 
+                        name="punishment" 
+                        placeholder={props.performance.punishment} 
+                        onChange={(e)=>setPunishment(e.target.value)}
+                    />
                     <br></br>
-                    <label htmlFor="percentImproved">What percentage will you improve by?</label>
-                    <input type="number" name="percentImproved"  placeholder={props.performance.percentImproved.toString()} onChange={(e)=>setPercentImproved(e.target.valueAsNumber)}/>
+                    <label htmlFor="percentImproved">
+                        What percentage will you improve by?
+                    </label>
+                    <input 
+                        type="number" 
+                        name="percentImproved"  
+                        placeholder={props.performance.percentImproved.toString()} 
+                        onChange={(e)=>setPercentImproved(e.target.valueAsNumber)}
+                    />
                     <br></br>
-                    <button onClick={(e)=> showForm(e)}>Add Process Goal</button>
-                    <button onClick={(e)=> updatePerformance(e, props.performance._id)} type="submit">Update</button>
-                    <button onClick={(e)=> props.delete(e, props.performance._id)}>Delete</button>
+                    <button onClick={(e)=> showForm(e)}>
+                        Add Process Goal
+                    </button>
+                    <button onClick={(e)=> updatePerformance(
+                        e, 
+                        props.performance._id, 
+                        props.setOutcomes, 
+                        props.setActive
+                    )}>
+                        Update
+                    </button>
+                    <button onClick={(e)=> props.delete(
+                        e,
+                        props.performance._id, 
+                        props.setOutcomes, 
+                        props.setActive, 
+                        props.active._id
+                    )}>
+                        Delete
+                    </button>
                 </fieldset>
             </form> :
-            <ProcessForm performance={props.performance} setToggle={setToggle} toggle={toggle} ogID={props.ogID} setOutcomes={props.setOutcomes}/>
+            <ProcessForm 
+                performance={props.performance} 
+                setToggle={setToggle} 
+                toggle={toggle} 
+                ogID={props.ogID} 
+                setOutcomes={props.setOutcomes}
+                setActive={props.setActive}
+                active={props.active}
+            />
         }
         </>
     )
