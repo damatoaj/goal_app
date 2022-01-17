@@ -27,7 +27,6 @@ const ProcessList:React.FC <proProps> = (props) => {
 
     return(
         <>
-            <h3>{props.performance.description}</h3>
             {list}
         </>
     )

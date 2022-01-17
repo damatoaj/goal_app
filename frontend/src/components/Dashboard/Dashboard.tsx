@@ -59,16 +59,27 @@ const Dashboard: React.FC = () => {
     };
 
     return (
-        <section>
+        <section id="dashboard">
+            <div id="dash-col-1">
             <h1>Outcome Goals</h1>
             <ul>
                 {outcomes.map((outcome: Outcome, id:number) => {
                     return (
-                        <OutcomeLi key={id} description={outcome.description} id={id} handleActive={handleActive} delete={deleteOutcome} />
+                        <OutcomeLi 
+                            key={id} 
+                            id={id}
+                            description={outcome.description} 
+                            handleActive={handleActive} 
+                            delete={deleteOutcome} 
+                            active={active}
+                        />
                     )
                 })}
             </ul>
-            {active ? <Display active={active} delete={deleteOutcome}/> : <li><Link to='/newOutcome'>Make some goals</Link></li> }
+            </div>
+            <div id="dash-col-2">
+                
+                {active ? <Display active={active}/> : <></> }
                 {active ?
                     <ul> 
                         <Perf 
@@ -86,9 +97,10 @@ const Dashboard: React.FC = () => {
                             active={active}
                         />
                     </ul>
-                    : 
-                    <li><Link to="/newGoals">Add some performance goals</Link></li>
+                    :
+                    <Link to='/newOutcome'>Make some goals</Link>
                 }
+            </div>
         </section>
     )
 };

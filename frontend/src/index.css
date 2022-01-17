@@ -1,10 +1,29 @@
 html {
-  font-family:sans-serif;
+  font-family: 'Alegreya,', serif;
+  
 }
 
 body {
   margin: 0;
-  padding: 0;
+  padding:0;
+  box-sizing: border-box;
+}
+:root {
+  --mar-pad-reg: .5rem;
+  --mar-pad-l: calc(var(--mar-pad-reg)*1.5);
+  --mar-pad-xl: calc(var(--mar-pad-reg)*2);
+  --mar-pad-s: calc(var(--mar-pad-reg)*.75);
+  --mar-pad-xs: calc(var(--mar-pad-reg)*.5);
+
+  --font-size-rg: .5vw;
+  --font-size-sm: calc(var(--font-size-rg) *.75);
+
+  --warning-clr: red;
+}
+
+ul {
+  list-style: none; 
+  padding:0;
 }
 
 #pgForm {
@@ -17,4 +36,95 @@ body {
   padding: 5rem;
   background-color: blue;
   z-index: 1;
+}
+
+#landing {
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+#dashboard {
+  height:90vh;
+  width:100vw;
+}
+
+form {
+  text-align: left;
+}
+
+#outcome-li {
+  width:100%;
+  text-overflow: wrap;
+}
+.delete-circle {
+  text-align: center;
+  border-radius: 50%;
+  border-width:0;
+  outline: 1px solid black;
+  font-style: var(--font-size-sm);
+  position: relative;
+  top: -35px;
+  right:-80px;
+  /* right: -10px; */
+  z-index: 1;
+  width: 20px;
+  padding:var(--mar-pad-xs);
+  cursor: pointer;
+}
+
+.delete-circle:hover {
+  background-color: var(--warning-clr);
+}
+.activeBtn {
+  background-color: violet;
+  border-radius: 0% 50% 50% 0%;
+}
+@media screen and (max-width: 375px){
+
+  
+  #landing {
+    flex-direction:column;
+    height:100vh;
+  }
+
+  form {
+    padding: var(--mar-pad-reg);
+    margin: var(--mar-pad-xl);
+  }
+  fieldset {
+    padding:var(--mar-pad-xl);
+  }
+
+  header {
+    display:flex; 
+    justify-content: space-between;
+  }
+
+  nav{
+    display:flex;
+  }
+
+  #dashboard {
+    display: inline-grid;
+    grid-template-columns: [first] 25% [second] 75%;
+  }
+  li > button {
+    width:100%;
+  }
+  #dash-col-1 {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  #dash-col-2 {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #dash-header {
+    display: flex;
+    justify-content: space-around;
+  }
 }

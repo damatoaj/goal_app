@@ -29,13 +29,18 @@ const Signup:React.FC<signupProps> = (props) => {
 
     return(
         <form onSubmit={submitHandler}>
-            <label htmlFor="name">User name</label>
-            <input type="text" name="name" ref={usernameInputRef} />
-            <label htmlFor="email">Email</label>
-            <input type="email" name="email" ref={emailInputRef} />
-            <label htmlFor="password">Password</label>
-            <input type="password" name="password" ref={passwordInputRef} />
-            <button type="submit">Signup</button>
+            <fieldset>
+                <label htmlFor="name">User name</label>
+                <input type="text" name="name" ref={usernameInputRef} />
+                <br></br>
+                <label htmlFor="email">Email</label>
+                <input type="email" name="email" ref={emailInputRef} />
+                <br></br>
+                <label htmlFor="password">Password</label>
+                <input type="password" name="password" ref={passwordInputRef} />
+                <br></br>
+                <button type="submit">Signup</button>
+            </fieldset>
         </form>
     )
 }

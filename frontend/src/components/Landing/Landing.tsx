@@ -22,10 +22,13 @@ const Landing:React.FC <landingProps>= (props) => {
     };
 
     return (
-        <main>
-            <Info content={text} handleNext={handleNext} handlePrev={handlePrev} />
-            <Signup handleAuth={props.handleAuth} />
-            <Login handleAuth={props.handleAuth}/>
+        <main id="landing">
+                <Info content={text} handleNext={handleNext} handlePrev={handlePrev} />
+                <div>
+                    <h2>Signup or Login</h2>
+                    <Signup handleAuth={props.handleAuth} />
+                    <Login handleAuth={props.handleAuth}/>
+                </div>
         </main>
     )
 };

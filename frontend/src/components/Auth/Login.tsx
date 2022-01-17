@@ -27,11 +27,15 @@ const Login:React.FC<loginProps> = (props) => {
 
     return (
         <form onSubmit={submitHandler}>
-            <label htmlFor="email">Email</label>
-            <input type="email" name="email" ref={emailInputRef} />
-            <label htmlFor="password">Password</label>
-            <input type="password" name="password" ref={passwordInputRef} />
-            <button type="submit">Login</button>
+            <fieldset>
+                <label htmlFor="email">Email</label>
+                <input type="email" name="email" ref={emailInputRef} />
+                <br></br>
+                <label htmlFor="password">Password</label>
+                <input type="password" name="password" ref={passwordInputRef} />
+                <br></br>
+                <button type="submit">Login</button>
+            </fieldset>
         </form>
     )
 }

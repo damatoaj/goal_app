@@ -9,21 +9,25 @@ type authHeaderProps = {
 
 const AuthHeader: React.FC <authHeaderProps> = (props) => {
     return (
-        <header>
-            {props.user.name}
-            <button onClick={props.logoutHandler}>
-                <Link to="/">Logout</Link>
-            </button>
-            <ul>
-                <li>
-                    <Link to='/home'>Home</Link>
-                </li>
-                <li>
-                    <Link to='/newOutcome'>Outcome Goals</Link>
-                </li>
-            </ul>
+        <>
+            <header>
+                <h3>
+                    Welcome {props.user.name}
+                </h3>
+                <nav>
+                    <ul>
+                        <Link to='/home'>Home</Link>
+                    </ul>
+                    <ul>
+                        <Link to='/newOutcome'>Outcome Goals</Link>
+                    </ul>
+                    <ul onClick={props.logoutHandler}>
+                        <Link to="/">Logout</Link>
+                    </ul>
+                </nav>
+            </header>
             <Outlet />
-        </header>
+        </>
     )
 };
 
