@@ -80,6 +80,20 @@ form {
   background-color: violet;
   border-radius: 0% 50% 50% 0%;
 }
+
+#dash-header {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  margin-left: var(--mar-pad-xl);
+  padding:var(--mar-pad-reg);
+  border: 2px solid black;
+}
+
+.perf-list {
+  display:none;
+}
+
 @media screen and (max-width: 375px){
 
   
@@ -123,8 +137,5 @@ form {
     flex-direction: column;
   }
 
-  #dash-header {
-    display: flex;
-    justify-content: space-around;
-  }
+  
 }

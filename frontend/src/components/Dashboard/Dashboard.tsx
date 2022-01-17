@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState, FormEvent} from 'react';
+import React, { useEffect, useState, FormEvent, useRef, MouseEvent, RefObject} from 'react';
 import { Outcome } from '../../interfaces/outcomeGoals.model';
 import {Link} from 'react-router-dom';
 
@@ -12,6 +12,9 @@ import Process from './Process';
 const Dashboard: React.FC = () => {
     const [outcomes, setOutcomes] = useState<Outcome[]>([]);
     const [active, setActive] = useState<Outcome>(outcomes[0]);
+    const [hidden, setHidden] = useState<Boolean>(false);
+
+    const perfList = useRef<HTMLUListElement>(null);
 
     useEffect(()=> {
         (async ()=> {
@@ -23,6 +26,15 @@ const Dashboard: React.FC = () => {
            };
         })()
     }, []);
+
+    const handleHidden = (e: MouseEvent, h:Boolean) => {
+        setHidden(!hidden);
+        if (hidden && perfList.current) {
+            perfList.current.style.display = 'block'
+        } else if (!hidden && perfList.current) {
+            perfList.current.style.display = 'none'
+        }
+    };
 
     const handleActive = (e: any) => {
         setActive(outcomes[e.target.name])
@@ -79,9 +91,9 @@ const Dashboard: React.FC = () => {
             </div>
             <div id="dash-col-2">
                 
-                {active ? <Display active={active}/> : <></> }
+                {active ? <Display handleHidden={handleHidden} active={active} hidden={hidden}/> : <></> }
                 {active ?
-                    <ul> 
+                    <ul className="perf-list" ref={perfList}> 
                         <Perf 
                             performances={active.performanceGoals} 
                             setOutcomes={setOutcomes} 
@@ -89,6 +101,7 @@ const Dashboard: React.FC = () => {
                             ogID={active._id}
                             setActive={setActive}
                             active={active}
+                            
                         /> 
                         <Process 
                             performances={active.performanceGoals} 
