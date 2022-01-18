@@ -11,11 +11,22 @@ const processSchema = new mongoose.Schema({
         required: true
     },
     duration: {
-        type: Number,
-        required: true
+        number: {
+            type: Number,
+        },
+        time: {
+            type:String,
+            enum: ['MIN', 'HRS']
+        }
     },
     frequency: {
-        type: String
+        number: {
+            type: String
+        },
+        type: {
+            type:String,
+            enum:["DAILY, WEEKLY, YEARLY"]
+        }
     },
     repeats: {
         type: Boolean
@@ -31,9 +42,13 @@ const performanceSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    percentImproved: {
-        type: Number,
-        required: true
+    improveBy: {
+        unit: {
+        type:String,
+    }, 
+        number: {
+        type: Number
+    },
     },
     reward: {
         type: String

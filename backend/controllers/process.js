@@ -10,7 +10,7 @@ const create = async(req, res) => {
         if(!performance) res.status(404).send9();
         performance.processGoals.push(req.body);
         outcome.save();
-        res.send(outcome);
+        res.status(201).send(outcome);
     } catch(e) {
         res.status(500).send();
     }

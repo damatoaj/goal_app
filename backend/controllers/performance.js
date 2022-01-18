@@ -2,11 +2,20 @@
 const Outcome = require('../models/outcome');
 //define the functions
 const create = async (req, res) => {
+    console.log(req.body, 'the body')
+    console.log(req.body.improveBy.number, req.body.improveBy.unit)
     try {
         const outcome = await Outcome.findById(req.params.id);
         if(!outcome) res.status(404).send();
-        outcome.performanceGoals.push(req.body);
-        console.log(outcome)
+        outcome.performanceGoals.push({
+            description:req.body.description,
+            dueDate:req.body.dueDate,
+            reward:req.body.reward,
+            punishment:req.body.punishment,
+            improveBy: {unit:req.body.improveBy.unit, number:req.body.improveBy.number},
+            complete:req.body.complete,
+            processGoals:req.body.processGoals
+        });
         outcome.save();
         res.send(outcome);
     } catch(e) {
