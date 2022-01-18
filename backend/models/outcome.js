@@ -25,7 +25,7 @@ const processSchema = new mongoose.Schema({
         },
         type: {
             type:String,
-            enum:["DAILY, WEEKLY, YEARLY"]
+            enum:["DAILY, WEEKLY, MONTHLY, YEARLY"]
         }
     },
     repeats: {
