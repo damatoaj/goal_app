@@ -38,7 +38,8 @@ const ProcessForm: React.FC <pfProps> = (props) => {
                 setT(false);
             }
         } catch(err) {
-            console.log(err)
+            console.log(err);
+            alert('No fields can be blank');
         }
     };
 

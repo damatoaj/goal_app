@@ -3,8 +3,10 @@ import {Outcome} from '../../interfaces/outcomeGoals.model';
 
 type outcomesProps = {
     outcomes: Outcome [];
-    setOc: (arg:Outcome) => void;
-}
+    setOc: (arg:Outcome | null) => void;
+    text:string;
+};
+
 const SelectOutcome: React.FC <outcomesProps> = (props) => {
     let options = props.outcomes.map((outcome: Outcome, id:number)=> {
         return (
@@ -13,17 +15,25 @@ const SelectOutcome: React.FC <outcomesProps> = (props) => {
     });
 
     const handleSelect = (idx:number, outcomes:Outcome[], setO:Function) => {
-        let arr = outcomes.filter(outcome => outcomes.indexOf(outcome) === idx);
+        console.log(idx, outcomes, setO)
+        let arr = outcomes.filter(outcome => outcomes.indexOf(outcome) +1 === idx);
+        console.log(arr)
         setO(arr[0]);
     };
 
     return (
-        <>
-        <h2>Or edit a goal you already have</h2>
-        <select onChange={(e)=> handleSelect(e.target.options.selectedIndex, props.outcomes, props.setOc)} name='oc'>
-            {options}
-        </select>
-        </>
+        <span>
+            <h2>{props.text}</h2>
+            <select onChange={(e)=> handleSelect(e.target.options.selectedIndex, props.outcomes, props.setOc)} name='oc'>
+                <option value='' selected disabled hidden>Select</option>
+                {options}
+            </select>
+            { props.text !== 'Or edit a current goal' ?
+                <button onClick={()=>props.setOc(null)}>New Goal</button>
+                :
+                <></>
+            }
+        </span>
     )
 };
 

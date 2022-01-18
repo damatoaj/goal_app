@@ -16,6 +16,7 @@ const OutcomeForm : React.FC <formProps> = (props) => {
     const handleForm = async (e:FormEvent) => {
         e.preventDefault();
         try {
+
             const res: any = await axios.post(
                 `http://localhost:3000/outcomes`,
                 {
@@ -29,7 +30,8 @@ const OutcomeForm : React.FC <formProps> = (props) => {
             const newOutcome: Outcome = await res.data;
             if(newOutcome) props.setOc(newOutcome);
         } catch (err) {
-            console.log(err)
+            console.log(err);
+            alert('No fields can be blank');
         }
     };
     
@@ -47,7 +49,7 @@ const OutcomeForm : React.FC <formProps> = (props) => {
             />
             <br></br>
             <label>
-                {props.oc !==null ? `Currently due on ${props.oc.dateDue.toString().slice(0,10)}`:'When\'s it Due?'}
+                {props.oc ? `Currently due on ${props.oc.dateDue.toString().slice(0,10)}`:'When\'s it Due?'}
             </label>
             <input 
                 type="date" 

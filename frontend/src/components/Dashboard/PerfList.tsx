@@ -6,6 +6,7 @@ import DatePicker from 'react-datepicker';
 
 import "react-datepicker/dist/react-datepicker.css";
 import ProcessForm from './ProcessForm';
+import ProcessList from './ProcessList';
 
 type listProp = {
     performance: Performance;
@@ -23,6 +24,7 @@ const PerfList: React.FC <listProp> = (props) => {
     const [reward, setReward] = useState<String>('');
     const [punishment, setPunishment] = useState<String>('');
     const [percentImproved, setPercentImproved] = useState<Number>(0);
+    const [hidePro, setHidePro] = useState<Boolean>(false);
 
     let date : Date = new Date(props.performance.dueDate);
 
@@ -53,9 +55,15 @@ const PerfList: React.FC <listProp> = (props) => {
         setToggle(true);
     }
 
+    const showProcess = (e:MouseEvent) => {
+        e.preventDefault();
+        setHidePro(!hidePro);
+    }
+
     return (
         <>
             {!toggle? 
+            <>
             <form>
                 <fieldset>
                     <legend>{props.performance.description}</legend>
@@ -138,8 +146,19 @@ const PerfList: React.FC <listProp> = (props) => {
                     )}>
                         Delete
                     </button>
+                    {props.performance.processGoals.length > 0 ? <button onClick={showProcess}>{hidePro ? 'Hide Process Goals': 'Show Process Goals'}</button> : <></>}
                 </fieldset>
-            </form> :
+            </form>
+            <ProcessList 
+                performance={props.performance} 
+                setOutcomes={props.setOutcomes}
+                setActive={props.setActive}
+                active={props.active}
+                hidePro={hidePro}
+                setHidePro={setHidePro}
+            />
+            </>
+            :
             <ProcessForm 
                 performance={props.performance} 
                 setToggle={setToggle} 

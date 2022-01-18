@@ -1,4 +1,5 @@
-import React, { MouseEvent, useRef } from 'react';
+import React, { MouseEvent } from 'react';
+import {Link} from 'react-router-dom';
 import {Outcome} from '../../interfaces/outcomeGoals.model';
 
 type displayProps = {
@@ -21,7 +22,10 @@ const Display: React.FC <displayProps> = (props) => {
             <p>{props.active.punishment}</p>
             <h3>How will you reward yourself when you accomplish this goal?</h3>
             <p>{props.active.reward}</p>
-            <button onClick={(e) => props.handleHidden(e, props.hidden)}>Show Performance Goals</button>
+            { props.active.performanceGoals.length < 1 ?
+                <Link to='/newOutcome'>Make Some Performance Goals</Link> :
+                <button onClick={(e) => props.handleHidden(e, props.hidden)}>Show Performance Goals</button>
+            }
         </article>
     )
 };

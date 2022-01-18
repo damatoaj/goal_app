@@ -19,22 +19,21 @@ const Perf: React.FC <perfProps> = (props) => {
 
     let list = props.performances.map((performance:Performance,key:number) => {
         return (
-            <li key={key}>
-                <PerfList 
-                    performance={performance} 
-                    delete={props.delete} 
-                    setOutcomes={props.setOutcomes} 
-                    ogID={props.ogID}
-                    setActive={props.setActive}
-                    active={props.active}
-                />
-            </li>
+            <PerfList
+                key={key}
+                performance={performance} 
+                delete={props.delete} 
+                setOutcomes={props.setOutcomes} 
+                ogID={props.ogID}
+                setActive={props.setActive}
+                active={props.active}
+            />
         )
     })
     return (
-        <ul>
-            {list.length > 0 ? list : <Link to='/newOutcome'>Add some performance goals</Link>}
-        </ul>
+        <>
+            {list.length > 0 ? list : <></>}
+        </>
     )
 };
 

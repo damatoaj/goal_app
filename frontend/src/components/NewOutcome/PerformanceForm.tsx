@@ -37,6 +37,7 @@ const PerformanceForm: React.FC <formProps> = (props) => {
             percentInputRef.current!.value = '';
         } catch (err) {
             console.log(err);
+            alert('No fields can be blank');
         }
     }
 

@@ -15,15 +15,9 @@ const AuthHeader: React.FC <authHeaderProps> = (props) => {
                     Welcome {props.user.name}
                 </h3>
                 <nav>
-                    <ul>
-                        <Link to='/home'>Home</Link>
-                    </ul>
-                    <ul>
-                        <Link to='/newOutcome'>Outcome Goals</Link>
-                    </ul>
-                    <ul onClick={props.logoutHandler}>
-                        <Link to="/">Logout</Link>
-                    </ul>
+                    <Link to='/home'>Home</Link>
+                    <Link to='/newOutcome'>Outcome Goals</Link>
+                    <Link to="/" onClick={props.logoutHandler}>Logout</Link>
                 </nav>
             </header>
             <Outlet />

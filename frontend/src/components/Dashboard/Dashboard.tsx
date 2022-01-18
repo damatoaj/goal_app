@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState, FormEvent, useRef, MouseEvent, RefObject} from 'react';
+import React, { useEffect, useState, FormEvent, useRef, MouseEvent} from 'react';
 import { Outcome } from '../../interfaces/outcomeGoals.model';
 import {Link} from 'react-router-dom';
 
@@ -7,14 +7,13 @@ import {Link} from 'react-router-dom';
 import OutcomeLi from './OutcomeLi';
 import Perf from './Performance';
 import Display from './Display';
-import Process from './Process';
 
 const Dashboard: React.FC = () => {
     const [outcomes, setOutcomes] = useState<Outcome[]>([]);
     const [active, setActive] = useState<Outcome>(outcomes[0]);
     const [hidden, setHidden] = useState<Boolean>(false);
 
-    const perfList = useRef<HTMLUListElement>(null);
+    const perfList = useRef<HTMLLIElement>(null);
 
     useEffect(()=> {
         (async ()=> {
@@ -71,9 +70,9 @@ const Dashboard: React.FC = () => {
     };
 
     return (
-        <section id="dashboard">
+        <main id="dashboard">
             <div id="dash-col-1">
-            <h1>Outcome Goals</h1>
+            <h3>Outcome Goals</h3>
             <ul>
                 {outcomes.map((outcome: Outcome, id:number) => {
                     return (
@@ -93,7 +92,7 @@ const Dashboard: React.FC = () => {
                 
                 {active ? <Display handleHidden={handleHidden} active={active} hidden={hidden}/> : <></> }
                 {active ?
-                    <ul className="perf-list" ref={perfList}> 
+                    <li className="perf-list" ref={perfList}> 
                         <Perf 
                             performances={active.performanceGoals} 
                             setOutcomes={setOutcomes} 
@@ -103,18 +102,13 @@ const Dashboard: React.FC = () => {
                             active={active}
                             
                         /> 
-                        <Process 
-                            performances={active.performanceGoals} 
-                            setOutcomes={setOutcomes}
-                            setActive={setActive}
-                            active={active}
-                        />
-                    </ul>
+                        
+                    </li>
                     :
-                    <Link to='/newOutcome'>Make some goals</Link>
+                    <></>
                 }
             </div>
-        </section>
+        </main>
     )
 };
 

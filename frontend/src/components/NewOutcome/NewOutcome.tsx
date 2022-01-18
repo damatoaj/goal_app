@@ -23,17 +23,16 @@ const NewOutcome: React.FC = () => {
         return (
             <main>
                 <h1>Make A New Outcome Goal </h1>
-                <SelectOutcome outcomes={outcomes} setOc={setOc} />
-                <OutcomeForm setOc={setOc}  oc={oc}/>
-                
+                <OutcomeForm setOc={setOc}  oc={oc} />
+                <SelectOutcome outcomes={outcomes} setOc={setOc} text={'Or edit a current goal'}/>
             </main>
         )
     } else{
         return(
             <main>
+                <SelectOutcome outcomes={outcomes} setOc={setOc} text={'Select a different goal'} />
                 <h1>{oc.description}</h1>
                 <OutcomeForm setOc={setOc}  oc={oc}/>
-                <SelectOutcome outcomes={outcomes} setOc={setOc} />
                 {oc.performanceGoals.length > 0 ? <h2>Add more performance goals...</h2> : <h2>Add a Performance Goal</h2>}
                 <PerformanceForm id={oc._id} setOc={setOc} />
             </main>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, {ChangeEvent, FormEvent, useState} from 'react';
+import React, {useRef, FormEvent, useState} from 'react';
 import {Process} from '../../interfaces/processGoals.models';
 import {Outcome} from '../../interfaces/outcomeGoals.model';
 
@@ -8,6 +8,7 @@ type pgProps = {
     setOutcomes:(arg:Outcome[]) => void;
     setActive:(arg:Outcome) => void;
     active: Outcome;
+    hidePro:Boolean;
 }
 
 const ProcessGoal: React.FC <pgProps> = (props) => {
@@ -15,6 +16,13 @@ const ProcessGoal: React.FC <pgProps> = (props) => {
     const [frequency, setFrequency] = useState<number>(props.process.frequency);
     const [repeats, setRepeats] = useState<boolean>(props.process.repeats);
 
+    // const fieldset = useRef<HTMLFieldSetElement>(null);
+
+    // if(fieldset.current && props.hidePro) {
+    //     fieldset.current.style.display = 'block'
+    // } else if (fieldset.current && !props.hidePro) {
+    //     fieldset.current.style.display = 'none'
+    // }
     const handleUpdate = async (e:FormEvent, id:string, act:string, setA:Function, setO:Function) => {
         e.preventDefault();
         try {
