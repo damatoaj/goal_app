@@ -34,7 +34,7 @@ const Login:React.FC<loginProps> = (props) => {
                 <label htmlFor="password">Password</label>
                 <input type="password" name="password" ref={passwordInputRef} />
                 <br></br>
-                <button type="submit" className="landing-btn">Login</button>
+                <button type="submit" className="landing-btn update">Login</button>
             </fieldset>
         </form>
     )

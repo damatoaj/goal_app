@@ -4,7 +4,10 @@ export interface Performance {
     _id: string;
     dueDate: Date;
     description: string;
-    percentImproved: number;
+    improveBy: {
+        number:number,
+        unit:string,
+    };
     reward: string;
     punishment: string;
     completed: Boolean;

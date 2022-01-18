@@ -41,6 +41,7 @@ const OutcomeForm : React.FC <formProps> = (props) => {
             <label>
                 What's the Goal?
             </label>
+            <br></br>
             <input 
                 type="text" 
                 name="description" 
@@ -48,18 +49,22 @@ const OutcomeForm : React.FC <formProps> = (props) => {
                 placeholder={props.oc?.description}
             />
             <br></br>
+            <br></br>
             <label>
                 {props.oc ? `Currently due on ${props.oc.dateDue.toString().slice(0,10)}`:'When\'s it Due?'}
             </label>
+            <br></br>
             <input 
                 type="date" 
                 name="dueDate" 
                 ref={dateDueInputRef} 
             />
             <br></br>
+            <br></br>
             <label>
                 How will you reward yourself?
             </label>
+            <br></br>
             <input 
                 type="text" 
                 name="reward" 
@@ -67,15 +72,18 @@ const OutcomeForm : React.FC <formProps> = (props) => {
                 placeholder={props.oc?.reward}
             />
             <br></br>
+            <br></br>
             <label>
                 How will you hold yourself accountable?
             </label>
+            <br></br>
             <input 
                 type="text" 
                 name="punishment" 
                 ref={punishmentInputRef} 
                 placeholder={props.oc?.punishment}
             />
+            <br></br>
             <br></br>
             <button type="submit" className="landing-btn">Submit</button>
             </fieldset>

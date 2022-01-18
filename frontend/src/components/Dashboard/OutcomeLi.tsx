@@ -20,7 +20,7 @@ const OutcomeLi: React.FC <liProps> = (props) => {
     return(
         <li id="outcome-li">
             <button onClick={props.handleActive} name={props.id.toString()} value={props.description} ref={btn}>{props.description}</button>
-            <button className="delete-circle" onClick={props.delete}  name={props.active?._id}>x</button>
+            <button className="delete-circle warning" onClick={props.delete}  name={props.active?._id}>x</button>
         </li>
     )
 };

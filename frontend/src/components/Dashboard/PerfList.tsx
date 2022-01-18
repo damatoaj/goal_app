@@ -1,4 +1,4 @@
-import React, {useState, FormEvent, MouseEvent} from 'react';
+import React, {useState, FormEvent, MouseEvent, useEffect} from 'react';
 import axios from 'axios';
 import {Performance} from '../../interfaces/performanceGoals.model';
 import {Outcome} from '../../interfaces/outcomeGoals.model';
@@ -25,6 +25,8 @@ const PerfList: React.FC <listProp> = (props) => {
     const [punishment, setPunishment] = useState<String>('');
     const [percentImproved, setPercentImproved] = useState<Number>(0);
     const [hidePro, setHidePro] = useState<Boolean>(false);
+
+console.log(props, 'perf list')
 
     let date : Date = new Date(props.performance.dueDate);
 
@@ -122,7 +124,7 @@ const PerfList: React.FC <listProp> = (props) => {
                     <input 
                         type="number" 
                         name="percentImproved"  
-                        placeholder={props.performance.percentImproved.toString()} 
+                        placeholder={props.performance.improveBy.number.toString()} 
                         onChange={(e)=>setPercentImproved(e.target.valueAsNumber)}
                     />
                     <br></br>
@@ -130,7 +132,9 @@ const PerfList: React.FC <listProp> = (props) => {
                         Add Process Goal
                     </button>
                     <br></br>
-                    <button onClick={(e)=> updatePerformance(
+                    <button 
+                        className='update'
+                        onClick={(e)=> updatePerformance(
                         e, 
                         props.performance._id, 
                         props.setOutcomes, 
@@ -139,7 +143,9 @@ const PerfList: React.FC <listProp> = (props) => {
                         Update
                     </button>
                     <br></br>
-                    <button onClick={(e)=> props.delete(
+                    <button 
+                        className="warning"
+                        onClick={(e)=> props.delete(
                         e,
                         props.performance._id, 
                         props.setOutcomes, 

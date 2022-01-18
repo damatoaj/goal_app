@@ -9,7 +9,6 @@ import SelectOutcome from './SelectOutcome';
 const NewOutcome: React.FC = () => {
     const [oc, setOc] = useState<Outcome | null>(null);
     const [outcomes, setOutcomes] = useState<Outcome[]>([]);
-    console.log(oc, 'in the new outcome')
 
     useEffect(()=> {
         (async ()=> {
@@ -22,9 +21,9 @@ const NewOutcome: React.FC = () => {
     if (!oc) {
         return (
             <main>
-                <h1>Make A New Outcome Goal </h1>
+                <h1>{outcomes.length < 1 ? 'Make your first Outcome Goal': 'Make A New Outcome Goal'}</h1>
                 <OutcomeForm setOc={setOc}  oc={oc} />
-                <SelectOutcome outcomes={outcomes} setOc={setOc} text={'Or edit a current goal'}/>
+                {outcomes.length > 0 ? <SelectOutcome outcomes={outcomes} setOc={setOc} text={'Or edit a current goal'}/> : <></>}
             </main>
         )
     } else{

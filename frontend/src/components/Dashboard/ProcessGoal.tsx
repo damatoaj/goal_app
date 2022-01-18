@@ -93,6 +93,7 @@ const ProcessGoal: React.FC <pgProps> = (props) => {
                 />
                 <br></br>
                 <button 
+                    className='update'
                     onClick={(e:FormEvent)=> handleUpdate(
                         e,
                         props.process._id, 
@@ -103,7 +104,8 @@ const ProcessGoal: React.FC <pgProps> = (props) => {
                 >
                     Update
                 </button>
-                <button 
+                <button
+                    className="warning"
                     onClick={(e:FormEvent)=> handleDelete(
                         e, 
                         props.process._id, 

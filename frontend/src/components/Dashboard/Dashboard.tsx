@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState, FormEvent, useRef, MouseEvent} from 'react';
 import { Outcome } from '../../interfaces/outcomeGoals.model';
+import { Navigate } from 'react-router-dom';
 
 import OutcomeLi from './OutcomeLi';
 import Perf from './Performance';
@@ -21,6 +22,8 @@ const Dashboard: React.FC = () => {
                 setOutcomes(data);
                 setActive(data[0]);
            };
+           
+           if(data.length < 1) return <Navigate to='/newOutcome' />
         })()
     }, []);
 
@@ -66,6 +69,8 @@ const Dashboard: React.FC = () => {
             console.log(err)
         }
     };
+
+    
 
     return (
         <main id="dashboard">

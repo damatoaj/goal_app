@@ -6,6 +6,7 @@ body {
   margin: 0;
   padding:0;
   box-sizing: border-box;
+
 }
 :root {
   --mar-pad-reg: .5rem;
@@ -20,6 +21,7 @@ body {
   --font-size-xl: calc(var(--font-size-sm) * 15);
 
   --warning-clr: red;
+  --go-clr:green;
   --fir-clr:violet;
   --sec-clr: blue;
 
@@ -32,15 +34,12 @@ ul {
 }
 
 #pgForm {
-  position: absolute;
-  left: -50;
-  right: -50;
-  top: -50;
-  width: 50%;
-  height: 50%;
-  padding: 5rem;
+  position: relative;
+  height:100%;
+  width:100%;
+  padding:var(--mar-pad-reg);
+  margin-top:var(--mar-pad-reg);
   background-color: var(--sec-clr);
-  z-index: 1;
 }
 
 #landing {
@@ -113,6 +112,14 @@ main {
   border: 2px solid black;
 }
 
+.warning:hover {
+  background-color: var(--warning-clr);
+}
+
+.update:hover {
+  background-color: var(--go-clr);
+}
+
 
 #dash-col-2 {
   display: flex;
@@ -126,6 +133,7 @@ main {
   position: absolute;
   top: 4.8rem;
   margin-left: .5rem;
+  width:100%;
 }
 
 .process-list {
@@ -144,14 +152,17 @@ a {
 
 h1 {
   font-size: var(--font-size-xl);
+  text-decoration: underline;
 }
 
 h2 {
   font-size: var(--font-size-lg);
+  text-decoration: underline;
 }
 
 h3 {
   font-size:var(--font-size-rg);
+  
 }
 
 p{ 
@@ -173,6 +184,9 @@ input {
 }
 
   @media only screen and (min-width: 750px) {
+    :root {
+      --font-size-sm:.4vw;
+    }
     button {
       font-size: var(--font-size-rg);
     }
@@ -227,5 +241,33 @@ input {
     input {
       margin-top: var(--mar-pad-reg);
       margin-bottom: var(--mar-pad-reg);
+    }
+  }
+
+
+  @media only screen and (min-width: 700px) {
+    .delete-circle {
+      left: 11rem;
+      top: -2rem;
+      width:14%;
+    }
+  }
+
+  @media only screen and (min-width: 1000px) {
+    .delete-circle {
+      left: 13rem;
+      top: -2.5rem;
+    }
+  }
+
+  @media only screen and (min-width:1300px) {
+    :root{
+      --font-size-sm: .3vw;
+    }
+
+    .delete-circle {
+      left: 20rem;
+      top:-3rem;
+      width:12%;
     }
   }
