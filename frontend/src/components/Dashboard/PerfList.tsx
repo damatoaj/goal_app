@@ -129,6 +129,7 @@ const PerfList: React.FC <listProp> = (props) => {
                     <button onClick={(e)=> showForm(e)}>
                         Add Process Goal
                     </button>
+                    <br></br>
                     <button onClick={(e)=> updatePerformance(
                         e, 
                         props.performance._id, 
@@ -137,6 +138,7 @@ const PerfList: React.FC <listProp> = (props) => {
                     )}>
                         Update
                     </button>
+                    <br></br>
                     <button onClick={(e)=> props.delete(
                         e,
                         props.performance._id, 
@@ -146,6 +148,7 @@ const PerfList: React.FC <listProp> = (props) => {
                     )}>
                         Delete
                     </button>
+                    <br></br>
                     {props.performance.processGoals.length > 0 ? <button onClick={showProcess}>{hidePro ? 'Hide Process Goals': 'Show Process Goals'}</button> : <></>}
                 </fieldset>
             </form>

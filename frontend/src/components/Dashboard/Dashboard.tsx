@@ -1,8 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState, FormEvent, useRef, MouseEvent} from 'react';
 import { Outcome } from '../../interfaces/outcomeGoals.model';
-import {Link} from 'react-router-dom';
-
 
 import OutcomeLi from './OutcomeLi';
 import Perf from './Performance';
@@ -100,9 +98,8 @@ const Dashboard: React.FC = () => {
                             ogID={active._id}
                             setActive={setActive}
                             active={active}
-                            
                         /> 
-                        
+                        <button onClick={(e)=> handleHidden(e, hidden)}>Hide Performance Goals</button>
                     </li>
                     :
                     <></>

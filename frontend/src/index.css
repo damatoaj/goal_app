@@ -1,6 +1,5 @@
 html {
   font-family: 'Alegreya,', serif;
-  
 }
 
 body {
@@ -159,17 +158,32 @@ p{
   font-size:var(--font-size-rg);
 }
 
-  nav{
-    display:flex;
-    flex-wrap: wrap;
-    align-content: center;
-  }
+nav{
+  display:flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
 
-  li > button {
-    width:100%;
-  }
+li > button {
+  width:100%;
+}
+
+input {
+  border:2px solid black;
+}
 
   @media only screen and (min-width: 750px) {
+    button {
+      font-size: var(--font-size-rg);
+    }
+    legend {
+      font-size: var(--font-size-lg);
+    }
+    input[type=checkbox] {
+      width: 2rem;
+      height:2rem;
+    
+    }
     .perf-list {
       top: 7.5rem;
       margin-left: 1rem;
@@ -198,5 +212,20 @@ p{
       font-size: var(--font-size-rg);
       padding:var(--mar-pad-s);
       margin-left: var(--mar-pad-lg);
+    }
+
+    #outcome-li > button {
+      font-size: var(--font-size-rg);
+    }
+
+    .delete-circle {
+      left: 10.3rem;
+      top: -5rem;
+      padding:var(--mar-pad-lg);
+      width:20%;
+    }
+    input {
+      margin-top: var(--mar-pad-reg);
+      margin-bottom: var(--mar-pad-reg);
     }
   }
