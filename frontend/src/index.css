@@ -48,6 +48,7 @@ ul {
   text-align: center;
   display: flex;
   justify-content: space-around;
+  flex-direction: column;
 }
 
 #dashboard {
@@ -62,6 +63,7 @@ ul {
 header {
   display:flex; 
   justify-content: space-between;
+  padding:var(--mar-pad-s);
 }
 
 form {
@@ -100,7 +102,9 @@ fieldset {
   background-color: var(--fir-clr);
   border-radius: 0% 50% 50% 0%;
 }
-
+main {
+  margin: var(--mar-pad-s);
+}
 #dash-header {
   display: flex;
   justify-content: space-around;
@@ -121,7 +125,7 @@ fieldset {
   display: none;
   background-color:var(--fir-clr);
   position: absolute;
-  top: 3.7rem;
+  top: 4.8rem;
   margin-left: .5rem;
 }
 
@@ -131,6 +135,12 @@ fieldset {
   background-color: var(--sec-clr);
   position: absolute;
   top:0rem;
+}
+
+a {
+  margin:var(--mar-pad-s);
+  color:black;
+  padding-top:var(--mar-pad-lg);
 }
 
 h1 {
@@ -145,10 +155,48 @@ h3 {
   font-size:var(--font-size-rg);
 }
 
+p{ 
+  font-size:var(--font-size-rg);
+}
+
   nav{
     display:flex;
+    flex-wrap: wrap;
+    align-content: center;
   }
 
   li > button {
     width:100%;
+  }
+
+  @media only screen and (min-width: 750px) {
+    .perf-list {
+      top: 7.5rem;
+      margin-left: 1rem;
+    }
+
+    .landing-btn {
+      margin:var(--mar-pad-xl);
+      padding:var(--mar-pad-reg);
+      font-size: var(--font-size-rg);
+    }
+
+    label {
+      font-size: var(--font-size-rg);
+      margin-right:var(--mar-pad-reg);
+    }
+    input{
+      font-size: var(--font-size-rg);
+      padding-left: var(--mar-pad-xl);
+    }
+
+    a {
+      font-size: var(--font-size-rg);
+    }
+
+    select {
+      font-size: var(--font-size-rg);
+      padding:var(--mar-pad-s);
+      margin-left: var(--mar-pad-lg);
+    }
   }

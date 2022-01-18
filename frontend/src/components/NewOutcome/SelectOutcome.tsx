@@ -29,7 +29,7 @@ const SelectOutcome: React.FC <outcomesProps> = (props) => {
                 {options}
             </select>
             { props.text !== 'Or edit a current goal' ?
-                <button onClick={()=>props.setOc(null)}>New Goal</button>
+                <button onClick={()=>props.setOc(null)} className="landing-btn">New Goal</button>
                 :
                 <></>
             }

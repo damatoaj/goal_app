@@ -89,7 +89,7 @@ const PerformanceForm: React.FC <formProps> = (props) => {
                     ref={punishmentInputRef} 
                 />
                 <br></br>
-                <button type="submit">Add</button>
+                <button type="submit" className="landing-btn">Add</button>
             </fieldset>
         </form>
     )

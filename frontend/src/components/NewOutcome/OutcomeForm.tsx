@@ -77,7 +77,7 @@ const OutcomeForm : React.FC <formProps> = (props) => {
                 placeholder={props.oc?.punishment}
             />
             <br></br>
-            <button type="submit">Submit</button>
+            <button type="submit" className="landing-btn">Submit</button>
             </fieldset>
         </form>
     )

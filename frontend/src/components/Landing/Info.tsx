@@ -17,8 +17,8 @@ const Info:React.FC <infoProp> = (props) => {
                 <p>{props.content.p2}</p>
                 <p>{props.content.p3}</p>
             </article>
-            <button onClick={props.handlePrev}>Previous</button>
-            <button onClick={props.handleNext}>Next</button>
+            <button onClick={props.handlePrev} className="landing-btn">Previous</button>
+            <button onClick={props.handleNext} className="landing-btn">Next</button>
         </section>
     )
 }
